@@ -1,0 +1,24 @@
+{
+  "name": "api-tegra",
+  "version": "1.0.0",
+  "description": "Repositório para o projeto Tegra Food (API) desenvolvido em NodeJS",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lip-ee/api-tegra.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lip-ee/api-tegra/issues"
+  },
+  "homepage": "https://github.com/Lip-ee/api-tegra#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  }
+}
