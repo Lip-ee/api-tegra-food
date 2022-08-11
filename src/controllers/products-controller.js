@@ -1,4 +1,4 @@
-import { openDatabase } from "../database.js";
+import { openDatabase } from "../config-database.js";
 
 // save products
 export const saveProducts = async (req, res) => {
@@ -108,7 +108,9 @@ export const updateProductById = async (req, res) => {
 
     db.close();
 
-    res.send(product || {});
+    res.json({
+        "message": "Ops, parece que este ID não está no database :("
+    });
 };
 
 
@@ -119,15 +121,37 @@ export const deleteProductById = async (req, res) => {
     // main
     const { id } = req.params;
     
-    const data = await db.run(`
-        DELETE FROM products
-        WHERE id = ?
+    const product = await db.get(`
+        SELECT * FROM products WHERE id = ?
     `, [id]);
+
+    if(product){
+        const data = await db.run(`
+            DELETE FROM products
+            WHERE id = ?
+        `, [id]);
+
+        db.close();
+
+        res.send({
+            id,
+            message: `Produto [${id}] deletado com sucesso`
+        });
+        return;
+    }
 
     db.close();
 
-    res.send({
-        id,
-        message: `Produto [${id}] deletado com sucesso`
+    res.json({
+        "message": "Ops, parece que este ID não está no database :("
     });
+};
+
+
+// ping pong check api
+export const pingPong = async (req, res) => {
+    res.json({
+        "statusCode": 200,
+        "message": "pong!"
+    })
 };
