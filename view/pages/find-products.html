@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+
+    <script src="../services/product-services.js"></script>
+
+
+    <title>Tegra-Food</title>
+</head>
+<body>
+    <main class="container">
+
+        <hgroup>
+            <h2>GET</h2>
+            <h3>find all products - <strong>Tegra-Food!</strong></h3>
+        </hgroup>
+
+        <article>
+            O método GET geralmente é utilizado em APIs para "recuperar/listar". <br>
+            Preencha o formulário abaixo com os campos necessários para recuperar um registro do banco de dados! <br><br>
+            <i>~ dev Lipe</i>
+        </article>
+
+        <article>
+            <div class="grid">
+                <div>
+                    <hgroup>
+                        <h2>Input</h2>
+                        <h3>Entrada de dados</h3>
+                    </hgroup>
+
+                    <button onclick="viewAllProducts()" data-tooltip="Clique para fazer o request da API">Request!</button>
+                    
+                </div>
+                <div>
+                    <hgroup>
+                        <h2>Output</h2>
+                        <h3>Retorno de dados</h3>
+                    </hgroup>
+                    
+                    <article>
+                        
+                    </article>
+
+                </div>
+            </div>
+        </article>
+    
+    </main>
+
+    
+    <script>
+        function viewAllProducts(){
+            alert('aparentemente funcionou, amigo..');
+        }
+    </script>
+</body>
+</html>

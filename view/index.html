@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+
+    <script src="./services/product-services.js"></script>
+
+    <title>Tegra-Food</title>
+</head>
+<body>
+
+    <main class="container">
+
+    
+        <hgroup>
+            <h2>Olá! Seja bem vindo(a)</h2>
+            <h3>ao Back-end do <strong>Tegra-Food!</strong></h3>
+        </hgroup>
+        
+
+
+        <article>
+            "Antes de começarmos a explicação de todo o projeto, gostaria de reforçar: desenvolvi apenas o Back-end, portanto não leve em consideração o Front-end (ou leve também, a escolha é sua :D). <br>
+            Utilizei o Framework CSS minimalista para HTML semântico chamado <a href="https://picocss.com/">Pico.css</a>. <br>
+            Agora que temos as dúvidas esclarecidas, aperte os cintos e vamos lá!" <br><br>
+            <i>~ dev Lipe</i>
+        </article>
+
+
+    
+        <article>
+            <header>
+                Aqui abaixo encontrará todas as páginas e informações necessárias para os endpoints da API:
+            </header>
+            <table role="grid">
+
+                <thead>
+                <tr>
+                    <th scope="col">Methods</th>
+                    <th scope="col">About</th>
+                    <th scope="col">Pages</th>
+                    <th scope="col"><i data-tooltip="Caminho da request da API">Path</i></th>
+                    <th scope="col">Code</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                    
+                    <tr>
+                        <th scope="row">POST</th>
+                        <td>save products</td>
+                        <td><a href="./pages/save-products.html" role="button" data-tooltip="Página do método POST" style="background-color: #3cdf65; border-color: #3cdf65;">Go to</a></td>
+                        <td><kbd>'/api-tegra/'</kbd></td>
+                        <td>201</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">GET</th>
+                        <td>find all products</td>
+                        <td><a href="./pages/find-products.html" role="button" data-tooltip="Página do método GET" style="background-color: #6272a4; border-color: #6272a4;">Go to</a></td>
+                        <td><kbd>'/api-tegra/'</kbd></td>
+                        <td>200</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">GET</th>
+                        <td>find products by id</td>
+                        <td><a href="./pages/find-products-id.html" role="button" data-tooltip="Página do método GET" style="background-color: #6272a4; border-color: #6272a4;">Go to</a></td>
+                        <td><kbd>'/api-tegra/:id'</kbd></td>
+                        <td>200</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">PUT</th>
+                        <td>update products by id</td>
+                        <td><a href="./pages/update-products-id.html" role="button" data-tooltip="Página do método PUT" style="background-color: #e6a157; border-color: #e6a157;">Go to</a></td>
+                        <td><kbd>'/api-tegra/:id'</kbd></td>
+                        <td>200</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">DELETE</th>
+                        <td>delete products by id</td>
+                        <td><a href="./pages/delete-products-id.html" role="button" data-tooltip="Página do método DELETE" style="background-color: #ff5555; border-color: #ff5555;">Go to</a></td>
+                        <td><kbd>'/api-tegra/:id'</kbd></td>
+                        <td>200</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </article>
+        
+        
+    </main>
+
+</body>
+</html>
