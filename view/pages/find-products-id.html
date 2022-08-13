@@ -5,44 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-
-    <script src="../services/product-services.js"></script>
-
-
+    
     <title>Tegra-Food</title>
 </head>
 <body>
+
     <main class="container">
+
+        <a href="http://localhost:5500/view/"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946433.png" alt="home" width="4.2%"></a><br><br>
 
         <hgroup>
             <h2>GET</h2>
-            <h3>find products by id - <strong>Tegra-Food!</strong></h3>
+            <h3>find products by id • <strong>Tegra-Food!</strong></h3>
         </hgroup>
 
         <article>
-            O método GET geralmente é utilizado em APIs para "recuperar/listar". <br>
-            Preencha o formulário abaixo com os campos necessários para recuperar um registro do banco de dados! <br><br>
-            <i>~ dev Lipe</i>
+
+            <form>
+
+                <label for="prod_id">ID:</label>
+                <input type="text" name="prod_id" id="prod_id">
+
+                
+            </form>
+
         </article>
 
+        <div class="grid">
+            <div><button onclick="findProductById()">REQUEST!</button></div>
+            <div><button onclick="clearData()" class="secondary">$ clear Terminal</button></div>
+        </div>
+        
+
+        <hr>
+
+        <!-- TERMINAL (output) -->
         <article>
-            <div class="grid">
-                <div>
-                    <hgroup>
-                        <h2>Input</h2>
-                        <h3>Entrada de dados</h3>
-                    </hgroup>
-                    
-                </div>
-                <div>
-                    <hgroup>
-                        <h2>Output</h2>
-                        <h3>Retorno de dados</h3>
-                    </hgroup>
-                </div>
-            </div>
+            <h4><kbd>Terminal</kbd></h4>
+            <p id="output"></p>
         </article>
-    
+
+        
+        <footer class="container-fluid" style="margin-bottom: 0%;">
+            <blockquote style="margin-bottom: 0%;">
+                <small>Built with  ❤️  and <a href="https://picocss.com">Pico Framework</a> <br>by <a href="https://www.github.com/Lip-ee">Filipe Campos</a></small>
+            </blockquote>
+        </footer>
     </main>
+
+
+    
+
+    
+    <script>
+        
+        function findProductById(){
+            let prod_id = document.getElementById('prod_id').value;
+
+            fetch('http://localhost:8000/api-tegra/' + prod_id, {})
+                .then(res => res.json())
+                .then(data => {
+                    
+                    document.getElementById('output').innerHTML += "<br> <ins>[nodejs] root@root-pc:~/api/request/</ins> <br>"
+                    
+                    if(data.id == undefined){
+                        document.getElementById('output').innerHTML += `Infelizmente o ID ${prod_id} não existe no banco de dados. Verifique na página GET<br>`
+                    }else{
+                        document.getElementById('output').innerHTML += `
+                            ${JSON.stringify(`{<br><b>id:</b> <i>${data.id}</i><br> <b>title:</b> <i>'${data.title}'</i><br> <b>price:</b> <i>${data.price}</i><br> <b>description:</b> <i>'${data.description}'</i><br> <b>image-url:</b> <i>'${data.image}'</i> <br>}`)},<br>
+                        `;
+                    }
+                        
+                });
+        }
+
+        function clearData(){
+            document.getElementById('output').innerHTML = "";
+        }
+
+    </script>
 </body>
 </html>

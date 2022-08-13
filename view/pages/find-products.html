@@ -5,58 +5,67 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-
-    <script src="../services/product-services.js"></script>
-
-
+    
     <title>Tegra-Food</title>
 </head>
 <body>
+
     <main class="container">
+
+        <a href="http://localhost:5500/view/"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946433.png" alt="home" width="4.2%"></a><br><br>
 
         <hgroup>
             <h2>GET</h2>
-            <h3>find all products - <strong>Tegra-Food!</strong></h3>
+            <h3>find all products • <strong>Tegra-Food!</strong></h3>
         </hgroup>
 
+        <div class="grid">
+            <div><button onclick="findProducts()">REQUEST!</button></div>
+            <div><button onclick="clearData()" class="secondary">$ clear Terminal</button></div>
+        </div>
+        
+
+        <hr>
+
+        <!-- TERMINAL (output) -->
         <article>
-            O método GET geralmente é utilizado em APIs para "recuperar/listar". <br>
-            Preencha o formulário abaixo com os campos necessários para recuperar um registro do banco de dados! <br><br>
-            <i>~ dev Lipe</i>
+            <h4><kbd>Terminal</kbd></h4>
+            <p id="output"></p>
         </article>
 
-        <article>
-            <div class="grid">
-                <div>
-                    <hgroup>
-                        <h2>Input</h2>
-                        <h3>Entrada de dados</h3>
-                    </hgroup>
-
-                    <button onclick="viewAllProducts()" data-tooltip="Clique para fazer o request da API">Request!</button>
-                    
-                </div>
-                <div>
-                    <hgroup>
-                        <h2>Output</h2>
-                        <h3>Retorno de dados</h3>
-                    </hgroup>
-                    
-                    <article>
-                        
-                    </article>
-
-                </div>
-            </div>
-        </article>
-    
+        
+        <footer class="container-fluid" style="margin-bottom: 0%;">
+            <blockquote style="margin-bottom: 0%;">
+                <small>Built with  ❤️  and <a href="https://picocss.com">Pico Framework</a> <br>by <a href="https://www.github.com/Lip-ee">Filipe Campos</a></small>
+            </blockquote>
+        </footer>
     </main>
+
+
+    
 
     
     <script>
-        function viewAllProducts(){
-            alert('aparentemente funcionou, amigo..');
+
+        function findProducts(){
+            fetch('http://localhost:8000/api-tegra/', {})
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(product => {
+                        console.log(product)
+                        document.getElementById('output').innerHTML += `
+                            ${JSON.stringify(`{<br><b>id:</b> <i>${product.id}</i><br> <b>title:</b> <i>'${product.title}'</i><br> <b>price:</b> <i>${product.price}</i><br> <b>description:</b> <i>'${product.description}'</i><br> <b>image-url:</b> <i>'${product.image}'</i> <br>}`)},<br>
+                        `;
+                        
+                    }, document.getElementById('output').innerHTML += "<br> <ins>[nodejs] root@root-pc:~/api/request/</ins> <br>" );
+                });
         }
+
+
+        function clearData(){
+            document.getElementById('output').innerHTML = "";
+        }
+
     </script>
 </body>
 </html>
