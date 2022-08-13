@@ -4,6 +4,25 @@ import router from './routes.js';
 
 // app config
 const app = express();
+import cors from 'cors'
+
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE'
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+};
+  
+app.use(cors(corsOpts));
+
 app.use(express.json());
 app.use(router)
 
