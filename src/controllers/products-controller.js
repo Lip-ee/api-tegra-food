@@ -42,6 +42,29 @@ export const findAllProducts = async (req, res) => {
 };
 
 
+// find all products with filter
+export const findAllProductsWithFilter = async (req, res) => {
+    const db = await openDatabase();
+
+    const { category_q, alfa_q, min_q, max_q } = req.query;
+
+    console.log(category_q, alfa_q, min_q, max_q)
+
+    // main
+    const products = await db.all(`
+        SELECT * FROM products
+        WHERE (category = ?)
+            AND (price BETWEEN ? AND ?)
+        ORDER BY
+            ?;
+    `, [category_q, min_q, max_q, alfa_q])
+
+    db.close();
+
+    res.send(products);
+};
+
+
 // find products by id
 export const findProductById = async (req, res) => {
     const db = await openDatabase();

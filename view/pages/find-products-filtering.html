@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    
+    <title>Tegra-Food</title>
+</head>
+<body>
+
+    <main class="container">
+
+        <a href="http://localhost:5500/view/"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946433.png" alt="home" width="4.2%"></a><br><br>
+
+        <hgroup>
+            <h2>GET</h2>
+            <h3>find <u>especific</u> products • <strong>Tegra-Food!</strong></h3>
+        </hgroup>
+
+        <hr>
+
+        <br>
+        <a href="./find-products.html" role="button">GET sem Filtros</a>
+
+        <article>
+            <hgroup>
+                <h2>Filtering!</h2>
+                <h3>Escolha filtros para resultados mais acurados</h3>
+            </hgroup>
+            
+
+            <div class="grid">
+                <!-- FILTRO POR CATEGORIA -->
+                <div>
+                    <select id="category-options">
+                        <option value="" disabled selected>Categoria</option>
+                        <option value="salgado">salgado</option>
+                        <option value="sobremesa">sobremesa</option>
+                        <option value="bebida">bebida</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select id="alfabetic-order">
+                        <option value="" disabled selected>Ordem Crescente</option>
+                        <option value="id">id</option>
+                        <option value="title">title</option>
+                        <option value="price">price</option>
+                        <option value="description">description</option>
+                        <option value="image">image url</option>
+                        <option value="category">category</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div>
+                    <label for="min-value">Menor valor:
+                        <input type="number" name="min-value" id="min-value">
+                    </label>
+                </div>
+                <div>
+                    <label for="max-value">Maior valor:
+                        <input type="number" name="max-value" id="max-value">
+                    </label>
+                </div>
+            </div>
+
+        </article>
+
+        <br>
+
+        <div class="grid">
+            <div><button onclick="findProducts()">REQUEST!</button></div>
+            <div><button onclick="clearData()" class="secondary">$ clear Terminal</button></div>
+        </div>
+        
+
+        <hr>
+
+        <!-- TERMINAL (output) -->
+        <article>
+            <h4><kbd>Terminal</kbd></h4>
+            <p id="output"></p>
+        </article>
+
+        
+        <footer class="container-fluid" style="margin-bottom: 0%;">
+            <blockquote style="margin-bottom: 0%;">
+                <small>Built with  ❤️  and <a href="https://picocss.com">Pico Framework</a> <br>by <a href="https://www.github.com/Lip-ee">Filipe Campos</a></small>
+            </blockquote>
+        </footer>
+    </main>
+
+
+    
+
+    
+    <script>
+
+        function findProducts(){
+            const category_filter = document.getElementById('category-options').value;
+            const alfabetic_order = document.getElementById('alfabetic-order').value;
+            const min_value = document.getElementById('min-value').value;
+            const max_value = document.getElementById('max-value').value;
+
+            console.log(category_filter, alfabetic_order, min_value, max_value)
+            //localhost:8000/api-tegra?category_q=bebida&alfa_q=title&min_q=10&max_q=50
+            fetch('http://localhost:8000/api-tegra' + `?category_q=${category_filter}&alfa_q=${alfabetic_order}&min_q=${min_value}&max_q=${max_value}`, {})
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(product => {
+                        document.getElementById('output').innerHTML += `
+                            ${JSON.stringify(`{<br><b>id:</b> <i>${product.id}</i><br> <b>title:</b> <i>'${product.title}'</i><br> <b>price:</b> <i>${product.price}</i><br> <b>description:</b> <i>'${product.description}'</i><br> <b>image-url:</b> <i>'${product.image}'</i><br> <b>category:</b> <i>'${product.category}'</i> <br>}`)},<br>
+                        `;
+                        
+                    }, document.getElementById('output').innerHTML += "<br> <ins>[nodejs] root@root-pc:~/api/request/</ins> <br>" );
+                });
+        }
+
+
+        function clearData(){
+            document.getElementById('output').innerHTML = "";
+        }
+
+    </script>
+</body>
+</html>
